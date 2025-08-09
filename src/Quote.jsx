@@ -6,10 +6,22 @@ export default function Quote() {
   const [quote, setQuote] = useState(null);
 
   const fetchQuote = async () => {
-    const res = await fetch('https://type.fit/api/quotes');
-    const data = await res.json();
-    setQuote(data[Math.floor(Math.random() * data.length)]);
+    try {
+      const res = await fetch('https://api.quotable.io/random'); // or ZenQuotes
+      if (!res.ok) throw new Error('Failed to fetch');
+      const data = await res.json();
+      setQuote({ text: data.content, author: data.author });
+    } catch (err) {
+      console.error(err);
+      setQuote({ text: 'Could not load quote.', author: '' });
+    }
   };
+
+//  const fetchQuote = async () => {
+//    const res = await fetch('https://type.fit/api/quotes');
+//    const data = await res.json();
+//    setQuote(data[Math.floor(Math.random() * data.length)]);
+//  };
 
 //  const fetchQuote = async () => {
 //    try {
