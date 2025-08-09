@@ -7,7 +7,7 @@ export default function Quote() {
 
   const fetchQuote = async () => {
     try {
-      const res = await fetch('https://api.quotable.io/random'); // or ZenQuotes
+      const res = await fetch('https://zenquotes.io/api/random'); // or ZenQuotes
       if (!res.ok) throw new Error('Failed to fetch');
       const data = await res.json();
       setQuote({ text: data.content, author: data.author });
